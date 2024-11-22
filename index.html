@@ -1,107 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Autoexamen</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			margin: 20px;
-		}
-
-		.question {
-			display: none;
-		}
-
-		.question.active {
-			display: block;
-		}
-
-		button {
-			margin-top: 10px;
-			padding: 10px 20px;
-			font-size: 16px;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoexamen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #resultado {
+            margin-top: 20px;
+        }
+        .incorrect {
+            color: red;
+        }
+        .correct {
+            color: green;
+        }
+    </style>
 </head>
-
 <body>
-	<h1>Autoexamen</h1>
-	<div id="formulario">
-		<div class="question active" data-correct="A">
-			<p>1. ¿Cuál es la capital de Francia?</p>
-			<label><input type="radio" name="q1" value="A"> París</label><br>
-			<label><input type="radio" name="q1" value="B"> Roma</label><br>
-			<label><input type="radio" name="q1" value="C"> Berlín</label><br>
-		</div>
-		<div class="question" data-correct="C">
-			<p>2. ¿Cuál es el resultado de 5 x 5?</p>
-			<label><input type="radio" name="q2" value="A"> 20</label><br>
-			<label><input type="radio" name="q2" value="B"> 10</label><br>
-			<label><input type="radio" name="q2" value="C"> 25</label><br>
-		</div>
-		<div class="question" data-correct="B">
-			<p>3. ¿Quién escribió *Cien años de soledad*?</p>
-			<label><input type="radio" name="q3" value="A"> Pablo Neruda</label><br>
-			<label><input type="radio" name="q3" value="B"> Gabriel García Márquez</label><br>
-			<label><input type="radio" name="q3" value="C"> Isabel Allende</label><br>
-		</div>
-	</div>
-	<button id="next">Siguiente</button>
-	<button id="submit" style="display: none;">Finalizar</button>
-	<div id="resultado" style="display: none;">
-		<h2>Resultados</h2>
-		<p id="feedback"></p>
-	</div>
+    <h1>Autoexamen</h1>
+    <div id="formulario">
+        <div class="question active" data-correct="A">
+            <p>1. ¿Cuál es la capital de Francia?</p>
+            <label><input type="radio" name="q1" value="A"> París</label><br>
+            <label><input type="radio" name="q1" value="B"> Roma</label><br>
+            <label><input type="radio" name="q1" value="C"> Berlín</label><br>
+        </div>
+        <div class="question" data-correct="C">
+            <p>2. ¿Cuál es el resultado de 5 x 5?</p>
+            <label><input type="radio" name="q2" value="A"> 20</label><br>
+            <label><input type="radio" name="q2" value="B"> 10</label><br>
+            <label><input type="radio" name="q2" value="C"> 25</label><br>
+        </div>
+        <div class="question" data-correct="B">
+            <p>3. ¿Quién escribió *Cien años de soledad*?</p>
+            <label><input type="radio" name="q3" value="A"> Pablo Neruda</label><br>
+            <label><input type="radio" name="q3" value="B"> Gabriel García Márquez</label><br>
+            <label><input type="radio" name="q3" value="C"> Isabel Allende</label><br>
+        </div>
+        <div class="question" data-correct="A">
+            <p>4. ¿En qué continente se encuentra Egipto?</p>
+            <label><input type="radio" name="q4" value="A"> África</label><br>
+            <label><input type="radio" name="q4" value="B"> Asia</label><br>
+            <label><input type="radio" name="q4" value="C"> Europa</label><br>
+        </div>
+        <div class="question" data-correct="C">
+            <p>5. ¿Cuántos planetas hay en el sistema solar?</p>
+            <label><input type="radio" name="q5" value="A"> 7</label><br>
+            <label><input type="radio" name="q5" value="B"> 8</label><br>
+            <label><input type="radio" name="q5" value="C"> 9</label><br>
+        </div>
+    </div>
+    <button id="next">Siguiente</button>
+    <button id="submit" style="display: none;">Finalizar</button>
+    <div id="resultado" style="display: none;">
+        <h2>Resultados</h2>
+        <p id="feedback"></p>
+        <div id="detalles"></div>
+    </div>
 
-	<script>
-		const questions = document.querySelectorAll('.question');
-		let currentQuestion = 0;
+    <script>
+        const questions = document.querySelectorAll('.question');
+        let currentQuestion = 0;
+        let score = 0;
+        const nextButton = document.getElementById('next');
+        const submitButton = document.getElementById('submit');
+        const resultadoDiv = document.getElementById('resultado');
+        const feedback = document.getElementById('feedback');
+        const detalles = document.getElementById('detalles');
 
-		const nextButton = document.getElementById('next');
-		const submitButton = document.getElementById('submit');
-		const resultadoDiv = document.getElementById('resultado');
-		const feedback = document.getElementById('feedback');
+        nextButton.addEventListener('click', () => {
+            const current = questions[currentQuestion];
+            const selected = current.querySelector('input[type="radio"]:checked');
 
-		nextButton.addEventListener('click', () => {
-			const current = questions[currentQuestion];
-			const selected = current.querySelector('input[type="radio"]:checked');
+            if (!selected) {
+                alert('Por favor, selecciona una respuesta.');
+                return;
+            }
 
-			if (!selected) {
-				alert('Por favor, selecciona una respuesta.');
-				return;
-			}
+            if (selected.value === current.getAttribute('data-correct')) {
+                score++;
+            }
 
-			current.classList.remove('active');
-			currentQuestion++;
+            current.classList.remove('active');
+            currentQuestion++;
 
-			if (currentQuestion < questions.length) {
-				questions[currentQuestion].classList.add('active');
-			} else {
-				nextButton.style.display = 'none';
-				submitButton.style.display = 'inline-block';
-			}
-		});
+            if (currentQuestion < questions.length) {
+                questions[currentQuestion].classList.add('active');
+            } else {
+                nextButton.style.display = 'none';
+                submitButton.style.display = 'inline-block';
+            }
+        });
 
-		submitButton.addEventListener('click', () => {
-			let score = 0;
+        submitButton.addEventListener('click', () => {
+            let resultHTML = `Obtuviste ${score} de ${questions.length} respuestas correctas.`;
+            feedback.textContent = resultHTML;
+            resultadoDiv.style.display = 'block';
+            submitButton.style.display = 'none';
 
-			questions.forEach(question => {
-				const correct = question.getAttribute('data-correct');
-				const selected = question.querySelector('input[type="radio"]:checked');
+            // Mostrar detalles de respuestas
+            detalles.innerHTML = '';
+            questions.forEach((question, index) => {
+                const selected = question.querySelector('input[type="radio"]:checked');
+                const correctAnswer = question.getAttribute('data-correct');
+                const questionText = question.querySelector('p').textContent;
+                const correctLabel = question.querySelector(`input[value="${correctAnswer}"]`).parentElement;
 
-				if (selected && selected.value === correct) {
-					score++;
-				}
-			});
-
-			feedback.textContent = `Obtuviste ${score} de ${questions.length} respuestas correctas.`;
-			resultadoDiv.style.display = 'block';
-			submitButton.style.display = 'none';
-		});
-	</script>
+                if (selected) {
+                    const selectedLabel = question.querySelector(`input[value="${selected.value}"]`).parentElement;
+                    if (selected.value === correctAnswer) {
+                        detalles.innerHTML += `<p class="correct">Pregunta ${index + 1}: ${questionText}<br>Respuesta correcta: ${correctLabel.textContent}</p>`;
+                    } else {
+                        detalles.innerHTML += `<p class="incorrect">Pregunta ${index + 1}: ${questionText}<br>Tu respuesta: ${selectedLabel.textContent}<br>Respuesta correcta: ${correctLabel.textContent}</p>`;
+                    }
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
