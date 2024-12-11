@@ -1,17 +1,63 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Autoexamen</title>
+	<title>Autoexamen de Epilepsia</title>
 	<style>
+		/* Estilos generales */
 		body {
 			font-family: Arial, sans-serif;
-			margin: 20px;
+			line-height: 1.6;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f9;
+			color: #333;
+			transition: background-color 0.3s, color 0.3s;
+		}
+
+		.container {
+			max-width: 800px;
+			margin: 20px auto;
+			background: #fff;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			display: none;
+		}
+
+		.container.active {
+			display: block;
+		}
+
+		.presentation {
+			text-align: center;
+			margin-top: 20%;
+		}
+
+		.presentation button {
+			background-color: #007bff;
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 1.2em;
+			transition: background-color 0.3s;
+		}
+
+		.presentation button:hover {
+			background-color: #0056b3;
+		}
+
+		h1 {
+			text-align: center;
+			color: #444;
 		}
 
 		.question {
+			margin-bottom: 20px;
 			display: none;
 		}
 
@@ -19,154 +65,300 @@
 			display: block;
 		}
 
-		button {
-			margin-top: 10px;
-			padding: 10px 20px;
-			font-size: 16px;
+		.options {
+			margin-left: 20px;
+			/* display: flex; */
+			/* align-items: center; */
 		}
 
-		#resultado {
-			margin-top: 20px;
+		.options button {
+			margin-right: 5px;
+			padding: 5px 10px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s;
 		}
 
-		.incorrect {
-			color: red;
+		.options .true {
+			background-color: #d4edda;
+			color: #155724;
 		}
 
-		.correct {
-			color: green;
+		.options .false {
+			background-color: #f8d7da;
+			color: #721c24;
+		}
+
+		.response {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			border-radius: 50%;
+			font-weight: bold;
+			color: #fff;
+			transition: background-color 0.3s;
+		}
+
+		.response.true {
+			background-color: #28a745;
+		}
+
+		.response.false {
+			background-color: #dc3545;
+		}
+
+		.dark-mode {
+			background-color: #333;
+			color: #f4f4f9;
+		}
+
+		.dark-mode .container {
+			background: #444;
+			color: #f4f4f9;
+		}
+
+		.dark-mode button {
+			background-color: #555;
+			color: #fff;
+		}
+
+		.toggle-theme {
+			position: fixed;
+			top: 10px;
+			right: 10px;
+			background: none;
+			border: none;
+			font-size: 1.5em;
+			cursor: pointer;
+		}
+
+		.credits {
+			display: none;
+			text-align: center;
+		}
+
+		.credits.active {
+			display: block;
 		}
 	</style>
 </head>
 
 <body>
-	<h1>Autoexamen</h1>
-	<div id="formulario">
-		<div class="question active" data-correct="A">
-			<p>1. ¿Cuál es la capital de Francia?</p>
-			<label><input type="radio" name="q1" value="A"> París</label><br>
-			<label><input type="radio" name="q1" value="B"> Roma</label><br>
-			<label><input type="radio" name="q1" value="C"> Berlín</label><br>
-		</div>
-		<div class="question" data-correct="C">
-			<p>2. ¿Cuál es el resultado de 5 x 5?</p>
-			<label><input type="radio" name="q2" value="A"> 20</label><br>
-			<label><input type="radio" name="q2" value="B"> 10</label><br>
-			<label><input type="radio" name="q2" value="C"> 25</label><br>
-		</div>
-		<div class="question" data-correct="B">
-			<p>3. ¿Quién escribió *Cien años de soledad*?</p>
-			<label><input type="radio" name="q3" value="A"> Pablo Neruda</label><br>
-			<label><input type="radio" name="q3" value="B"> Gabriel García Márquez</label><br>
-			<label><input type="radio" name="q3" value="C"> Isabel Allende</label><br>
-		</div>
-		<div class="question" data-correct="A">
-			<p>4. ¿En qué continente se encuentra Egipto?</p>
-			<label><input type="radio" name="q4" value="A"> África</label><br>
-			<label><input type="radio" name="q4" value="B"> Asia</label><br>
-			<label><input type="radio" name="q4" value="C"> Europa</label><br>
-		</div>
-		<div class="question" data-correct="C">
-			<p>5. ¿Cuántos planetas hay en el sistema solar?</p>
-			<label><input type="radio" name="q5" value="A"> 7</label><br>
-			<label><input type="radio" name="q5" value="B"> 8</label><br>
-			<label><input type="radio" name="q5" value="C"> 9</label><br>
-		</div>
+	<button class="toggle-theme" onclick="toggleTheme()">🌙</button>
+
+	<!-- Pantalla de presentación -->
+	<div class="presentation">
+		<h1>Autoexamen de Epilepsia</h1>
+		<button onclick="showQuiz()">Continuar 👉</button>
 	</div>
-	<button id="next">Siguiente</button>
-	<button id="submit" style="display: none;">Finalizar</button>
-	<div id="resultado" style="display: none;">
-		<h2>Resultados</h2>
-		<p id="feedback"></p>
-		<div id="detalles"></div>
+
+	<!-- Contenedor de preguntas -->
+	<div class="container" id="quiz-container">
+		<h1>Autoexamen de Epilepsia</h1>
+		<form id="quiz">
+			<!-- Pregunta 1 -->
+			<div class="question active" id="question-1">
+				<p>La epilepsia es una enfermedad neurológica crónica que afecta a la población a nivel mundial, con una
+					incidencia en los niños entre 1 mes y 16 años de edad de 41x 100000 habitantes. Marque verdadero (V)
+					o falso (F) según corresponda.</p>
+
+				<!-- Inciso a -->
+				<div class="options" id="q1a">
+					<p>a) <button class="true" onclick="setAnswer('q1a', 'V', event)">V</button><button class="false"
+							onclick="setAnswer('q1a', 'F', event)">F</button><span class="response" style="display:none;"
+							id="response-q1a"></span> La crisis epiléptica es una manifestación
+						clínica que resulta de
+						una descarga excesiva y anormal de las neuronas cerebrales.</p>
+				</div>
+				
+				<!-- Inciso b -->
+				<div class="options" id="q1b">
+					<p>b) <button class="true" onclick="setAnswer('q1b', 'V', event)">V</button><button class="false"
+							onclick="setAnswer('q1b', 'F', event)">F</button><span class="response" style="display:none;"
+							id="response-q1b"></span> Las manifestaciones clínicas consisten en
+						fenómenos anormales ,
+						transitorios y súbitos.</p>
+				</div>
+				
+				<!-- Inciso c -->
+				<div class="options" id="q1c">
+					<p>c) <button class="true" onclick="setAnswer('q1c', 'V', event)">V</button><button class="false"
+							onclick="setAnswer('q1c', 'F', event)">F</button><span class="response" style="display:none;"
+							id="response-q1c"></span> El paciente presenta alteraciones de la
+						conciencia, eventos
+						motores, autonómicos o psíquicos.</p>
+				</div>
+				
+				<!-- Inciso d -->
+				<div class="options" id="q1d">
+					<p>d) <button class="true" onclick="setAnswer('q1d', 'V', event)">V</button><button class="false"
+							onclick="setAnswer('q1d', 'F', event)">F</button><span class="response" style="display:none;"
+							id="response-q1d"></span> El diagnóstico es clínico.</p>
+				</div>
+				
+				<!-- Inciso e -->
+				<div class="options" id="q1e">
+					<p>e) <button class="true" onclick="setAnswer('q1e', 'V', event)">V</button><button class="false"
+							onclick="setAnswer('q1e', 'F', event)">F</button><span class="response" style="display:none;"
+							id="response-q1e"></span> El diagnóstico tiene implicaciones
+						terapéuticas.</p>
+				</div>
+				
+				<!-- Inciso f -->
+				<div class="options" id="q1f">
+					<p>f) <button class="true" onclick="setAnswer('q1f', 'V', event)">V</button><button class="false"
+							onclick="setAnswer('q1f', 'F', event)">F</button><span class="response" style="display:none;"
+							id="response-q1f"></span> El diagnóstico no tiene implicaciones
+						pronósticas.</p>
+				</div>
+				
+				<!-- Inciso g -->
+				<div class="options" id="q1g">
+					<p>g) <button class="true" onclick="setAnswer('q1g', 'V', event)">V</button><button class="false"
+							onclick="setAnswer('q1g', 'F', event)">F</button><span class="response" style="display:none;"
+							id="response-q1g"></span> Las manifestaciones clínicas pueden ser
+						percibidas por el paciente
+						o por un observador.</p>
+				</div>
+
+				<button type="button" onclick="nextQuestion(1)">Siguiente</button>
+				<button type="button" onclick="evaluarPregunta1()">Evaluar Pregunta</button>
+				<button type="button" onclick="showCredits()">Ver créditos</button>
+			</div>
+			<div class="question" id="question-2">
+				<p>2. Marque los tipos de crisis epilépticas generalizadas:</p>
+				<div class="options">
+					<label><input type="checkbox" name="q2" value="1"> Ausencias, típicas y atípicas</label><br>
+					<label><input type="checkbox" name="q2" value="2"> Tónico clónicas generalizadas</label><br>
+					<label><input type="checkbox" name="q2" value="3"> Tónicas</label><br>
+					<label><input type="checkbox" name="q2" value="4"> Distónicas</label><br>
+					<label><input type="checkbox" name="q2" value="5"> Atónicas</label><br>
+					<label><input type="checkbox" name="q2" value="6"> Espasmos epilépticos</label><br>
+					<label><input type="checkbox" name="q2" value="7"> Clónicas</label>
+				</div>
+				<button type="button" onclick="nextQuestion(2)">Siguiente</button>
+			</div>
+			
+			<!-- Pregunta 3 -->
+			<div class="question" id="question-3">
+				<p>3. Factores que definen un síndrome epiléptico:</p>
+				<div class="options">
+					<label><input type="checkbox" name="q3" value="1"> Tipo de crisis</label>
+					<label><input type="checkbox" name="q3" value="2"> Edad de inicio</label>
+				</div>
+				<button type="button" onclick="nextQuestion(3)">Siguiente</button>
+			</div>
+			
+			<!-- Pregunta 4 -->
+			<div class="question" id="question-4">
+				<p>4. Diagnóstico clínico:</p>
+				<div class="options">
+					<label><input type="checkbox" name="q4" value="1"> Tipo de crisis</label>
+				</div>
+				<button type="button" onclick="showFinalMessage()">FIN</button>
+			</div>
+
+			<div id="result"></div>
+		</form>
+	</div>
+
+	<!-- Contenedor de créditos -->
+	<div class="credits" id="credits-container">
+		<h1>Dedicado a los estudiantes</h1>
 	</div>
 
 	<script>
-		// Seleccionamos todos los elementos con la clase "question" (cada pregunta del examen)
-		const questions = document.querySelectorAll('.question');
-		// Variable para rastrear qué pregunta está actualmente activa
-		let currentQuestion = 0;
-		// Variable para almacenar la puntuación del usuario
-		let score = 0;
+		// Modo claro/oscuro
+		function toggleTheme() {
+			const body = document.body;
+			const themeButton = document.querySelector('.toggle-theme');
+			body.classList.toggle('dark-mode');
+			themeButton.textContent = body.classList.contains('dark-mode') ? '🔆' : '🌙';
+		}
 
-		// Seleccionamos los botones y elementos de resultados
-		const nextButton = document.getElementById('next'); // Botón "Siguiente"
-		const submitButton = document.getElementById('submit'); // Botón "Finalizar"
-		const resultadoDiv = document.getElementById('resultado'); // Contenedor donde se muestran los resultados
-		const feedback = document.getElementById('feedback'); // Texto que muestra el puntaje
-		const detalles = document.getElementById('detalles'); // Contenedor para mostrar detalles de respuestas correctas/incorrectas
+		// Mostrar preguntas
+		function showQuiz() {
+			document.querySelector('.presentation').style.display = 'none';
+			document.getElementById('quiz-container').classList.add('active');
+		}
 
-		// Agregamos un evento al botón "Siguiente" para manejar el paso entre preguntas
-		nextButton.addEventListener('click', () => {
-			// Obtenemos la pregunta activa actual
-			const current = questions[currentQuestion];
-			// Buscamos qué opción ha seleccionado el usuario
-			const selected = current.querySelector('input[type="radio"]:checked');
 
-			// Si no ha seleccionado ninguna respuesta, mostramos una alerta
-			if (!selected) {
-				alert('Por favor, selecciona una respuesta.');
-				return;
+		function nextQuestion(current) {
+			const currentQuestion = document.querySelector(`#question-${current}`);
+			const nextQuestion = document.querySelector(`#question-${current + 1}`);
+
+			if (nextQuestion) {
+				currentQuestion.classList.remove('active');
+				nextQuestion.classList.add('active');
 			}
+		}
 
-			// Verificamos si la respuesta seleccionada es correcta
-			if (selected.value === current.getAttribute('data-correct')) {
-				score++; // Si es correcta, incrementamos el puntaje
-			}
 
-			// Ocultamos la pregunta actual
-			current.classList.remove('active');
-			// Pasamos a la siguiente pregunta
-			currentQuestion++;
 
-			// Si aún hay preguntas restantes, mostramos la siguiente
-			if (currentQuestion < questions.length) {
-				questions[currentQuestion].classList.add('active');
-			} else {
-				// Si no hay más preguntas, ocultamos el botón "Siguiente"
-				nextButton.style.display = 'none';
-				// Mostramos el botón "Finalizar"
-				submitButton.style.display = 'inline-block';
-			}
-		});
 
-		// Agregamos un evento al botón "Finalizar" para manejar los resultados
-		submitButton.addEventListener('click', () => {
-			// Mostramos el puntaje total del usuario
-			let resultHTML = `Obtuviste ${score} de ${questions.length} respuestas correctas.`;
-			feedback.textContent = resultHTML;
-			// Mostramos el contenedor de resultados
-			resultadoDiv.style.display = 'block';
-			// Ocultamos el botón "Finalizar"
-			submitButton.style.display = 'none';
 
-			// Mostrar detalles de respuestas
-			// Limpieza de detalles anteriores y generación de un resumen
-			detalles.innerHTML = '';
-			questions.forEach((question, index) => {
-				// Obtenemos la respuesta seleccionada por el usuario
-				const selected = question.querySelector('input[type="radio"]:checked');
-				// Obtenemos la respuesta correcta de la pregunta
-				const correctAnswer = question.getAttribute('data-correct');
-				// Obtenemos el texto de la pregunta
-				const questionText = question.querySelector('p').textContent;
-				// Obtenemos el texto de la respuesta correcta
-				const correctLabel = question.querySelector(`input[value="${correctAnswer}"]`).parentElement;
 
-				// Si el usuario seleccionó alguna respuesta
-				if (selected) {
-					const selectedLabel = question.querySelector(`input[value="${selected.value}"]`).parentElement;
 
-					// Si la respuesta es correcta, mostramos en verde
-					if (selected.value === correctAnswer) {
-						detalles.innerHTML += `<p class="correct">Pregunta ${index + 1}: ${questionText}<br>Respuesta correcta: ${correctLabel.textContent}</p>`;
-					} else {
-						// Si es incorrecta, mostramos en rojo la respuesta incorrecta y la correcta
-						detalles.innerHTML += `<p class="incorrect">Pregunta ${index + 1}: ${questionText}<br>Tu respuesta: ${selectedLabel.textContent}<br>Respuesta correcta: ${correctLabel.textContent}</p>`;
-					}
+		// Mostrar créditos
+		function showCredits() {
+			document.getElementById('quiz-container').classList.remove('active');
+			document.getElementById('credits-container').classList.add('active');
+		}
+
+		// Manejar respuestas
+		function setAnswer(id, value, event) {
+			event.preventDefault();
+
+			const response = document.getElementById(`response-${id}`);
+			response.textContent = value;
+			response.className = `response ${value === 'V' ? 'true' : 'false'}`;
+			response.style.display = 'inline-flex';
+
+			const buttons = document.querySelectorAll(`#${id} button`);
+			buttons.forEach(button => button.style.display = 'none');
+
+			response.onclick = () => {
+				buttons.forEach(button => button.style.display = 'inline-block');
+				response.textContent = '';
+				response.className = 'response';
+				response.style.display = 'none';
+			};
+		}
+
+		// Evaluar pregunta 1
+		function evaluarPregunta1() {
+			const correctas = {
+				q1a: 'V',
+				q1b: 'V',
+				q1c: 'V',
+				q1d: 'V',
+				q1e: 'V',
+				q1f: 'F',
+				q1g: 'V'
+			};
+			let puntaje = 5;
+			const errores = [];
+
+			for (const [key, valorCorrecto] of Object.entries(correctas)) {
+				const response = document.getElementById(`response-${key}`);
+				if (response.textContent !== valorCorrecto) {
+					puntaje--;
+					errores.push(`${key.toUpperCase()}: La respuesta correcta era ${valorCorrecto}`);
 				}
-			});
-		});
+			}
+
+			const resultado = document.getElementById("result");
+			resultado.innerHTML = `<p>Puntaje de la Pregunta 1: ${puntaje} puntos</p>`;
+			if (errores.length > 0) {
+				resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
+			}
+		}
 	</script>
 </body>
+
 </html>
