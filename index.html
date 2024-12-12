@@ -322,37 +322,41 @@
 				<button type="button" onclick="evaluarPregunta4()">Evaluar Pregunta</button>
 			</div>
 
-			<!-- Pregunta 5 -->
-			<div class="question" id="question-5">
-				<p>5. Marque las condiciones que pueden confundirse con epilepsia:</p>
-				<div class="options" id="q5a">
-					<p>a) <label><input type="checkbox" name="q5" value="q5a"> Espasmos del sollozo</label></p>
-				</div>
-				<div class="options" id="q5b">
-					<p>b) <label><input type="checkbox" name="q5" value="q5b"> Síncopes</label></p>
-				</div>
-				<div class="options" id="q5c">
-					<p>c) <label><input type="checkbox" name="q5" value="q5c"> Terror nocturno</label></p>
-				</div>
-				<div class="options" id="q5d">
-					<p>d) <label><input type="checkbox" name="q5" value="q5d"> Estrés postraumático</label></p>
-				</div>
-				<div class="options" id="q5e">
-					<p>e) <label><input type="checkbox" name="q5" value="q5e"> Vértigo paroxístico benigno</label></p>
-				</div>
-				<div class="options" id="q5f">
-					<p>f) <label><input type="checkbox" name="q5" value="q5f"> Temblores del neonato</label></p>
-				</div>
-				<div class="options" id="q5g">
-					<p>g) <label><input type="checkbox" name="q5" value="q5g"> Crisis imitadoras</label></p>
-				</div>
-				<button type="button" onclick="showCredits()">Ver créditos</button>
-				<button type="button" onclick="evaluarPregunta5()">Evaluar Pregunta</button>
-			</div>
+<!-- Pregunta 5 -->
+<div class="question" id="question-5">
+	<p>5. Marque las condiciones que pueden confundirse con epilepsia:</p>
+	<div class="options" id="q5a">
+		<p>a) <label><input type="checkbox" name="q5" value="q5a"> Espasmos del sollozo</label></p>
+	</div>
+	<div class="options" id="q5b">
+		<p>b) <label><input type="checkbox" name="q5" value="q5b"> Síncopes</label></p>
+	</div>
+	<div class="options" id="q5c">
+		<p>c) <label><input type="checkbox" name="q5" value="q5c"> Terror nocturno</label></p>
+	</div>
+	<div class="options" id="q5d">
+		<p>d) <label><input type="checkbox" name="q5" value="q5d"> Estrés postraumático</label></p>
+	</div>
+	<div class="options" id="q5e">
+		<p>e) <label><input type="checkbox" name="q5" value="q5e"> Vértigo paroxístico benigno</label></p>
+	</div>
+	<div class="options" id="q5f">
+		<p>f) <label><input type="checkbox" name="q5" value="q5f"> Temblores del neonato</label></p>
+	</div>
+	<div class="options" id="q5g">
+		<p>g) <label><input type="checkbox" name="q5" value="q5g"> Crisis imitadoras</label></p>
+	</div>
+	<button type="button" onclick="evaluarPregunta5()">Evaluar Pregunta</button>
+	<button type="button" onclick="calcularPuntuacionFinal()">Puntuación Final</button>
+</div>
+
 
 
 			<div id="result"></div>
 		</form>
+	</div>
+	<div class="container" id="final-score">
+		<!-- <button type="button" onclick="showCredits()">Ver créditos</button> -->
 	</div>
 
 	<!-- Contenedor de créditos -->
@@ -553,7 +557,7 @@
 						q5a: true,
 						q5b: true,
 						q5c: true,
-						q5d: false,
+						q5d: true,
 						q5e: true,
 						q5f: true,
 						q5g: true
@@ -581,6 +585,74 @@
 						resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
 					}
 				}
+
+				function calcularPuntuacionFinal() {
+					document.getElementById('quiz-container').classList.remove('active');
+					document.getElementById('final-score').classList.add('active');
+					const puntuaciones = [];
+					let totalErrores = "";
+
+					// Evaluar Pregunta 1
+					evaluarPregunta1();
+					const puntaje1 = obtenerPuntajeDePregunta(1);
+					puntuaciones.push(puntaje1);
+					totalErrores += obtenerErroresDePregunta(1);
+
+					// Evaluar Pregunta 2
+					evaluarPregunta2();
+					const puntaje2 = obtenerPuntajeDePregunta(2);
+					puntuaciones.push(puntaje2);
+					totalErrores += obtenerErroresDePregunta(2);
+
+					// Evaluar Pregunta 3
+					evaluarPregunta3();
+					const puntaje3 = obtenerPuntajeDePregunta(3);
+					puntuaciones.push(puntaje3);
+					totalErrores += obtenerErroresDePregunta(3);
+
+					// Evaluar Pregunta 4
+					evaluarPregunta4();
+					const puntaje4 = obtenerPuntajeDePregunta(4);
+					puntuaciones.push(puntaje4);
+					totalErrores += obtenerErroresDePregunta(4);
+
+					// Evaluar Pregunta 5
+					evaluarPregunta5();
+					const puntaje5 = obtenerPuntajeDePregunta(5);
+					puntuaciones.push(puntaje5);
+					totalErrores += obtenerErroresDePregunta(5);
+
+					const sumaPuntajes = puntuaciones.reduce((a, b) => a + b, 0);
+					let puntuacionFinal = 2;
+
+					if (sumaPuntajes >= 23) {
+						puntuacionFinal = 5;
+					} else if (sumaPuntajes >= 18) {
+						puntuacionFinal = 4;
+					} else if (puntuaciones.filter(p => p === 3).length <= 2 && sumaPuntajes >= 14) {
+						puntuacionFinal = 3;
+					}
+
+					const resultadoFinal = document.getElementById("final-score");
+					resultadoFinal.innerHTML = `<p>Puntuación Final: ${puntuacionFinal} puntos</p>`;
+					resultadoFinal.innerHTML += `<p>Detalles de las preguntas:</p>${totalErrores}`;
+				}
+
+				function obtenerPuntajeDePregunta(numero) {
+					const resultado = document.getElementById("result");
+					const regex = new RegExp(`Puntaje de la Pregunta ${numero}: (\\d+) puntos`);
+					const match = resultado.innerHTML.match(regex);
+					return match ? parseInt(match[1]) : 0;
+				}
+
+				function obtenerErroresDePregunta(numero) {
+					const resultado = document.getElementById("result");
+					const regex = new RegExp(`Puntaje de la Pregunta ${numero}:(.*?)<p>Errores:</p><ul>(.*?)</ul>`, 's');
+					const match = resultado.innerHTML.match(regex);
+					return match ? `<p>Pregunta ${numero}:</p><ul>${match[2]}</ul>` : "";
+				}
+			</script>
+
 
 </script>
 
