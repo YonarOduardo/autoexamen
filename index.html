@@ -396,6 +396,11 @@
 			}
 		}
 
+		// Asegurar que el puntaje mínimo sea 2
+		if (puntaje < 2) {
+			puntaje = 2;
+		}
+
 		const resultado = document.getElementById("result");
 		resultado.innerHTML = `<p>Puntaje de la Pregunta 1: ${puntaje} puntos</p>`;
 		if (errores.length > 0) {
@@ -426,6 +431,11 @@
 			}
 		}
 
+		// Asegurar que el puntaje mínimo sea 2
+		if (puntaje < 2) {
+			puntaje = 2;
+		}
+
 		const resultado = document.getElementById("result");
 		resultado.innerHTML = `<p>Puntaje de la Pregunta 2: ${puntaje} puntos</p>`;
 		if (errores.length > 0) {
@@ -433,6 +443,7 @@
 		}
 	}
 </script>
+
 
 </body>
 
