@@ -53,7 +53,7 @@
 
 		h1 {
 			text-align: center;
-			color: #444;
+			/* color: #444; */
 		}
 
 		.question {
@@ -127,6 +127,10 @@
 			color: #fff;
 		}
 
+		.dark-mode .toggle-theme {
+			background-color: transparent;
+		}
+
 		.toggle-theme {
 			position: fixed;
 			top: 10px;
@@ -170,97 +174,141 @@
 				<!-- Inciso a -->
 				<div class="options" id="q1a">
 					<p>a) <button class="true" onclick="setAnswer('q1a', 'V', event)">V</button><button class="false"
-							onclick="setAnswer('q1a', 'F', event)">F</button><span class="response" style="display:none;"
-							id="response-q1a"></span> La crisis epiléptica es una manifestación
+							onclick="setAnswer('q1a', 'F', event)">F</button><span class="response"
+							style="display:none;" id="response-q1a"></span> La crisis epiléptica es una manifestación
 						clínica que resulta de
 						una descarga excesiva y anormal de las neuronas cerebrales.</p>
 				</div>
-				
+
 				<!-- Inciso b -->
 				<div class="options" id="q1b">
 					<p>b) <button class="true" onclick="setAnswer('q1b', 'V', event)">V</button><button class="false"
-							onclick="setAnswer('q1b', 'F', event)">F</button><span class="response" style="display:none;"
-							id="response-q1b"></span> Las manifestaciones clínicas consisten en
+							onclick="setAnswer('q1b', 'F', event)">F</button><span class="response"
+							style="display:none;" id="response-q1b"></span> Las manifestaciones clínicas consisten en
 						fenómenos anormales ,
 						transitorios y súbitos.</p>
 				</div>
-				
+
 				<!-- Inciso c -->
 				<div class="options" id="q1c">
 					<p>c) <button class="true" onclick="setAnswer('q1c', 'V', event)">V</button><button class="false"
-							onclick="setAnswer('q1c', 'F', event)">F</button><span class="response" style="display:none;"
-							id="response-q1c"></span> El paciente presenta alteraciones de la
+							onclick="setAnswer('q1c', 'F', event)">F</button><span class="response"
+							style="display:none;" id="response-q1c"></span> El paciente presenta alteraciones de la
 						conciencia, eventos
 						motores, autonómicos o psíquicos.</p>
 				</div>
-				
+
 				<!-- Inciso d -->
 				<div class="options" id="q1d">
 					<p>d) <button class="true" onclick="setAnswer('q1d', 'V', event)">V</button><button class="false"
-							onclick="setAnswer('q1d', 'F', event)">F</button><span class="response" style="display:none;"
-							id="response-q1d"></span> El diagnóstico es clínico.</p>
+							onclick="setAnswer('q1d', 'F', event)">F</button><span class="response"
+							style="display:none;" id="response-q1d"></span> El diagnóstico es clínico.</p>
 				</div>
-				
+
 				<!-- Inciso e -->
 				<div class="options" id="q1e">
 					<p>e) <button class="true" onclick="setAnswer('q1e', 'V', event)">V</button><button class="false"
-							onclick="setAnswer('q1e', 'F', event)">F</button><span class="response" style="display:none;"
-							id="response-q1e"></span> El diagnóstico tiene implicaciones
+							onclick="setAnswer('q1e', 'F', event)">F</button><span class="response"
+							style="display:none;" id="response-q1e"></span> El diagnóstico tiene implicaciones
 						terapéuticas.</p>
 				</div>
-				
+
 				<!-- Inciso f -->
 				<div class="options" id="q1f">
 					<p>f) <button class="true" onclick="setAnswer('q1f', 'V', event)">V</button><button class="false"
-							onclick="setAnswer('q1f', 'F', event)">F</button><span class="response" style="display:none;"
-							id="response-q1f"></span> El diagnóstico no tiene implicaciones
+							onclick="setAnswer('q1f', 'F', event)">F</button><span class="response"
+							style="display:none;" id="response-q1f"></span> El diagnóstico no tiene implicaciones
 						pronósticas.</p>
 				</div>
-				
+
 				<!-- Inciso g -->
 				<div class="options" id="q1g">
 					<p>g) <button class="true" onclick="setAnswer('q1g', 'V', event)">V</button><button class="false"
-							onclick="setAnswer('q1g', 'F', event)">F</button><span class="response" style="display:none;"
-							id="response-q1g"></span> Las manifestaciones clínicas pueden ser
+							onclick="setAnswer('q1g', 'F', event)">F</button><span class="response"
+							style="display:none;" id="response-q1g"></span> Las manifestaciones clínicas pueden ser
 						percibidas por el paciente
 						o por un observador.</p>
 				</div>
 
 				<button type="button" onclick="nextQuestion(1)">Siguiente</button>
 				<button type="button" onclick="evaluarPregunta1()">Evaluar Pregunta</button>
-				<button type="button" onclick="showCredits()">Ver créditos</button>
 			</div>
+
+			<!-- Pregunta 2 -->
 			<div class="question" id="question-2">
 				<p>2. Marque los tipos de crisis epilépticas generalizadas:</p>
-				<div class="options">
-					<label><input type="checkbox" name="q2" value="1"> Ausencias, típicas y atípicas</label><br>
-					<label><input type="checkbox" name="q2" value="2"> Tónico clónicas generalizadas</label><br>
-					<label><input type="checkbox" name="q2" value="3"> Tónicas</label><br>
-					<label><input type="checkbox" name="q2" value="4"> Distónicas</label><br>
-					<label><input type="checkbox" name="q2" value="5"> Atónicas</label><br>
-					<label><input type="checkbox" name="q2" value="6"> Espasmos epilépticos</label><br>
-					<label><input type="checkbox" name="q2" value="7"> Clónicas</label>
+				<div class="options" id="q2a">
+					<p>a) <label><input type="checkbox" name="q2" value="q2a"> Ausencias, típicas y atípicas</label></p>
+				</div>
+				<div class="options" id="q2b">
+					<p>b) <label><input type="checkbox" name="q2" value="q2b"> Tónico clónicas generalizadas</label></p>
+				</div>
+				<div class="options" id="q2c">
+					<p>c) <label><input type="checkbox" name="q2" value="q2c"> Tónicas</label></p>
+				</div>
+				<div class="options" id="q2d">
+					<p>d) <label><input type="checkbox" name="q2" value="q2d"> Distónicas</label></p>
+				</div>
+				<div class="options" id="q2e">
+					<p>e) <label><input type="checkbox" name="q2" value="q2e"> Atónicas</label></p>
+				</div>
+				<div class="options" id="q2f">
+					<p>f) <label><input type="checkbox" name="q2" value="q2f"> Espasmos epilépticos</label></p>
+				</div>
+				<div class="options" id="q2g">
+					<p>g) <label><input type="checkbox" name="q2" value="q2g"> Clónicas</label></p>
 				</div>
 				<button type="button" onclick="nextQuestion(2)">Siguiente</button>
+				<button type="button" onclick="evaluarPregunta2()">Evaluar Pregunta</button>
 			</div>
-			
+
+
 			<!-- Pregunta 3 -->
 			<div class="question" id="question-3">
 				<p>3. Factores que definen un síndrome epiléptico:</p>
 				<div class="options">
-					<label><input type="checkbox" name="q3" value="1"> Tipo de crisis</label>
-					<label><input type="checkbox" name="q3" value="2"> Edad de inicio</label>
+					<label><input type="checkbox" name="q3" value="1"> Tipo de crisis</label><br>
+					<label><input type="checkbox" name="q3" value="2"> Edad de inicio de las crisis</label><br>
+					<label><input type="checkbox" name="q3" value="3"> Duración</label><br>
+					<label><input type="checkbox" name="q3" value="4"> Antecedentes patológicos familiares y
+						personales</label><br>
+					<label><input type="checkbox" name="q3" value="5"> Electroencefalograma ictal e
+						interictal</label><br>
+					<label><input type="checkbox" name="q3" value="6"> Examen físico</label><br>
+					<label><input type="checkbox" name="q3" value="7"> Estudios de neuroimagen</label>
 				</div>
 				<button type="button" onclick="nextQuestion(3)">Siguiente</button>
 			</div>
-			
+
 			<!-- Pregunta 4 -->
 			<div class="question" id="question-4">
 				<p>4. Diagnóstico clínico:</p>
 				<div class="options">
-					<label><input type="checkbox" name="q4" value="1"> Tipo de crisis</label>
+					<label><input type="checkbox" name="q4" value="1"> Tipo de crisis, duración, circunstancias,
+						frecuencia</label><br>
+					<label><input type="checkbox" name="q4" value="2"> Exámenes complementarios</label><br>
+					<label><input type="checkbox" name="q4" value="3"> Antecedentes prenatales, perinatales y
+						posnatales</label><br>
+					<label><input type="checkbox" name="q4" value="4"> Antecedentes del neurodesarrollo</label><br>
+					<label><input type="checkbox" name="q4" value="5"> Condiciones económicas y sociales</label><br>
+					<label><input type="checkbox" name="q4" value="6"> Condiciones culturales</label><br>
+					<label><input type="checkbox" name="q4" value="7"> Examen físico general y neurológico</label>
 				</div>
-				<button type="button" onclick="showFinalMessage()">FIN</button>
+				<button type="button" onclick="nextQuestion(4)">Siguiente</button>
+			</div>
+			<!-- Pregunta 5 -->
+			<div class="question" id="question-5">
+				<p>5. Marque las condiciones que pueden confundirse con epilepsia.</p>
+				<div class="options">
+					<label><input type="checkbox" name="q5" value="1"> Espasmos del sollozo</label><br>
+					<label><input type="checkbox" name="q5" value="2"> Síncopes</label><br>
+					<label><input type="checkbox" name="q5" value="3"> Terror nocturno</label><br>
+					<label><input type="checkbox" name="q5" value="4"> Estrés postraumático</label><br>
+					<label><input type="checkbox" name="q5" value="5"> Vértigo paroxístico benigno</label><br>
+					<label><input type="checkbox" name="q5" value="6"> Temblores del neonato</label><br>
+					<label><input type="checkbox" name="q5" value="7"> Crisis imitadoras</label>
+				</div>
+				<button type="button" onclick="showCredits()">Ver créditos</button>
 			</div>
 
 			<div id="result"></div>
@@ -297,11 +345,6 @@
 				nextQuestion.classList.add('active');
 			}
 		}
-
-
-
-
-
 
 
 		// Mostrar créditos
@@ -358,6 +401,36 @@
 				resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
 			}
 		}
+		function evaluarPregunta2() {
+			const correctas = {
+				q2a: true,
+				q2b: true,
+				q2c: true,
+				q2d: false,  // Este es incorrecto
+				q2e: true,
+				q2f: true,
+				q2g: true
+			};
+			let puntaje = 5;
+			const errores = [];
+
+			for (const [key, valorCorrecto] of Object.entries(correctas)) {
+				const checkbox = document.querySelector(`input[name="q2"][value="${key}"]`);
+				const isChecked = checkbox.checked;
+				if (isChecked !== valorCorrecto) {
+					puntaje--;
+					errores.push(`${key.toUpperCase()}: La respuesta correcta era ${valorCorrecto ? 'Marcado' : 'No Marcado'}`);
+				}
+			}
+
+			const resultado = document.getElementById("result");
+			resultado.innerHTML = `<p>Puntaje de la Pregunta 2: ${puntaje} puntos</p>`;
+			if (errores.length > 0) {
+				resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
+			}
+		}
+
+
 	</script>
 </body>
 
