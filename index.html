@@ -266,50 +266,90 @@
 			<!-- Pregunta 3 -->
 			<div class="question" id="question-3">
 				<p>3. Factores que definen un síndrome epiléptico:</p>
-				<div class="options">
-					<label><input type="checkbox" name="q3" value="1"> Tipo de crisis</label><br>
-					<label><input type="checkbox" name="q3" value="2"> Edad de inicio de las crisis</label><br>
-					<label><input type="checkbox" name="q3" value="3"> Duración</label><br>
-					<label><input type="checkbox" name="q3" value="4"> Antecedentes patológicos familiares y
-						personales</label><br>
-					<label><input type="checkbox" name="q3" value="5"> Electroencefalograma ictal e
-						interictal</label><br>
-					<label><input type="checkbox" name="q3" value="6"> Examen físico</label><br>
-					<label><input type="checkbox" name="q3" value="7"> Estudios de neuroimagen</label>
+				<div class="options" id="q3a">
+					<p>a) <label><input type="checkbox" name="q3" value="q3a"> Tipo de crisis</label></p>
+				</div>
+				<div class="options" id="q3b">
+					<p>b) <label><input type="checkbox" name="q3" value="q3b"> Edad de inicio de las crisis</label></p>
+				</div>
+				<div class="options" id="q3c">
+					<p>c) <label><input type="checkbox" name="q3" value="q3c"> Duración</label></p>
+				</div>
+				<div class="options" id="q3d">
+					<p>d) <label><input type="checkbox" name="q3" value="q3d"> Antecedentes patológicos familiares y
+							personales</label></p>
+				</div>
+				<div class="options" id="q3e">
+					<p>e) <label><input type="checkbox" name="q3" value="q3e"> Electroencefalograma ictal e interictal</label></p>
+				</div>
+				<div class="options" id="q3f">
+					<p>f) <label><input type="checkbox" name="q3" value="q3f"> Examen físico</label></p>
+				</div>
+				<div class="options" id="q3g">
+					<p>g) <label><input type="checkbox" name="q3" value="q3g"> Estudios de neuroimagen</label></p>
 				</div>
 				<button type="button" onclick="nextQuestion(3)">Siguiente</button>
+				<button type="button" onclick="evaluarPregunta3()">Evaluar Pregunta</button>
 			</div>
 
 			<!-- Pregunta 4 -->
 			<div class="question" id="question-4">
 				<p>4. Diagnóstico clínico:</p>
-				<div class="options">
-					<label><input type="checkbox" name="q4" value="1"> Tipo de crisis, duración, circunstancias,
-						frecuencia</label><br>
-					<label><input type="checkbox" name="q4" value="2"> Exámenes complementarios</label><br>
-					<label><input type="checkbox" name="q4" value="3"> Antecedentes prenatales, perinatales y
-						posnatales</label><br>
-					<label><input type="checkbox" name="q4" value="4"> Antecedentes del neurodesarrollo</label><br>
-					<label><input type="checkbox" name="q4" value="5"> Condiciones económicas y sociales</label><br>
-					<label><input type="checkbox" name="q4" value="6"> Condiciones culturales</label><br>
-					<label><input type="checkbox" name="q4" value="7"> Examen físico general y neurológico</label>
+				<div class="options" id="q4a">
+					<p>a) <label><input type="checkbox" name="q4" value="q4a"> Tipo de crisis, duración, circunstancias,
+							frecuencia</label></p>
+				</div>
+				<div class="options" id="q4b">
+					<p>b) <label><input type="checkbox" name="q4" value="q4b"> Exámenes complementarios</label></p>
+				</div>
+				<div class="options" id="q4c">
+					<p>c) <label><input type="checkbox" name="q4" value="q4c"> Antecedentes prenatales, perinatales y
+							posnatales</label></p>
+				</div>
+				<div class="options" id="q4d">
+					<p>d) <label><input type="checkbox" name="q4" value="q4d"> Antecedentes del neurodesarrollo</label></p>
+				</div>
+				<div class="options" id="q4e">
+					<p>e) <label><input type="checkbox" name="q4" value="q4e"> Condiciones económicas y sociales</label></p>
+				</div>
+				<div class="options" id="q4f">
+					<p>f) <label><input type="checkbox" name="q4" value="q4f"> Condiciones culturales</label></p>
+				</div>
+				<div class="options" id="q4g">
+					<p>g) <label><input type="checkbox" name="q4" value="q4g"> Examen físico general y neurológico</label></p>
 				</div>
 				<button type="button" onclick="nextQuestion(4)">Siguiente</button>
+				<button type="button" onclick="evaluarPregunta4()">Evaluar Pregunta</button>
 			</div>
+
 			<!-- Pregunta 5 -->
 			<div class="question" id="question-5">
-				<p>5. Marque las condiciones que pueden confundirse con epilepsia.</p>
-				<div class="options">
-					<label><input type="checkbox" name="q5" value="1"> Espasmos del sollozo</label><br>
-					<label><input type="checkbox" name="q5" value="2"> Síncopes</label><br>
-					<label><input type="checkbox" name="q5" value="3"> Terror nocturno</label><br>
-					<label><input type="checkbox" name="q5" value="4"> Estrés postraumático</label><br>
-					<label><input type="checkbox" name="q5" value="5"> Vértigo paroxístico benigno</label><br>
-					<label><input type="checkbox" name="q5" value="6"> Temblores del neonato</label><br>
-					<label><input type="checkbox" name="q5" value="7"> Crisis imitadoras</label>
+				<p>5. Marque las condiciones que pueden confundirse con epilepsia:</p>
+				<div class="options" id="q5a">
+					<p>a) <label><input type="checkbox" name="q5" value="q5a"> Espasmos del sollozo</label></p>
+				</div>
+				<div class="options" id="q5b">
+					<p>b) <label><input type="checkbox" name="q5" value="q5b"> Síncopes</label></p>
+				</div>
+				<div class="options" id="q5c">
+					<p>c) <label><input type="checkbox" name="q5" value="q5c"> Terror nocturno</label></p>
+				</div>
+				<div class="options" id="q5d">
+					<p>d) <label><input type="checkbox" name="q5" value="q5d"> Estrés postraumático</label></p>
+				</div>
+				<div class="options" id="q5e">
+					<p>e) <label><input type="checkbox" name="q5" value="q5e"> Vértigo paroxístico benigno</label></p>
+				</div>
+				<div class="options" id="q5f">
+					<p>f) <label><input type="checkbox" name="q5" value="q5f"> Temblores del neonato</label></p>
+				</div>
+				<div class="options" id="q5g">
+					<p>g) <label><input type="checkbox" name="q5" value="q5g"> Crisis imitadoras</label></p>
 				</div>
 				<button type="button" onclick="showCredits()">Ver créditos</button>
+				<button type="button" onclick="evaluarPregunta5()">Evaluar Pregunta</button>
 			</div>
+
 
 			<div id="result"></div>
 		</form>
@@ -442,6 +482,106 @@
 			resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
 		}
 	}
+	function evaluarPregunta3() {
+			const correctas = {
+				q3a: true,
+				q3b: true,
+				q3c: false,
+				q3d: true,
+				q3e: true,
+				q3f: true,
+				q3g: true
+			};
+			let puntaje = 5;
+			const errores = [];
+
+			for (const [key, valorCorrecto] of Object.entries(correctas)) {
+				const checkbox = document.querySelector(`input[name="q3"][value="${key}"]`);
+				const isChecked = checkbox.checked;
+				if (isChecked !== valorCorrecto) {
+					puntaje--;
+					errores.push(`${key.toUpperCase()}: La respuesta correcta era ${valorCorrecto ? 'Marcado' : 'No Marcado'}`);
+				}
+			}
+
+			// Asegurar que el puntaje mínimo sea 2
+			if (puntaje < 2) {
+				puntaje = 2;
+			}
+
+			const resultado = document.getElementById("result");
+			resultado.innerHTML = `<p>Puntaje de la Pregunta 3: ${puntaje} puntos</p>`;
+			if (errores.length > 0) {
+				resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
+			}
+		}
+		function evaluarPregunta4() {
+				const correctas = {
+					q4a: true,
+					q4b: false,
+					q4c: true,
+					q4d: true,
+					q4e: true,
+					q4f: true,
+					q4g: true
+				};
+				let puntaje = 5;
+				const errores = [];
+
+				for (const [key, valorCorrecto] of Object.entries(correctas)) {
+					const checkbox = document.querySelector(`input[name="q4"][value="${key}"]`);
+					const isChecked = checkbox.checked;
+					if (isChecked !== valorCorrecto) {
+						puntaje--;
+						errores.push(`${key.toUpperCase()}: La respuesta correcta era ${valorCorrecto ? 'Marcado' : 'No Marcado'}`);
+					}
+				}
+
+				// Asegurar que el puntaje mínimo sea 2
+				if (puntaje < 2) {
+					puntaje = 2;
+				}
+
+				const resultado = document.getElementById("result");
+				resultado.innerHTML = `<p>Puntaje de la Pregunta 4: ${puntaje} puntos</p>`;
+				if (errores.length > 0) {
+					resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
+				}
+			}
+			function evaluarPregunta5() {
+					const correctas = {
+						q5a: true,
+						q5b: true,
+						q5c: true,
+						q5d: false,
+						q5e: true,
+						q5f: true,
+						q5g: true
+					};
+					let puntaje = 5;
+					const errores = [];
+
+					for (const [key, valorCorrecto] of Object.entries(correctas)) {
+						const checkbox = document.querySelector(`input[name="q5"][value="${key}"]`);
+						const isChecked = checkbox.checked;
+						if (isChecked !== valorCorrecto) {
+							puntaje--;
+							errores.push(`${key.toUpperCase()}: La respuesta correcta era ${valorCorrecto ? 'Marcado' : 'No Marcado'}`);
+						}
+					}
+
+					// Asegurar que el puntaje mínimo sea 2
+					if (puntaje < 2) {
+						puntaje = 2;
+					}
+
+					const resultado = document.getElementById("result");
+					resultado.innerHTML = `<p>Puntaje de la Pregunta 5: ${puntaje} puntos</p>`;
+					if (errores.length > 0) {
+						resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
+					}
+				}
+
 </script>
 
 
