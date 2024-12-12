@@ -2851,75 +2851,114 @@ button:active {
 					}
 				}
 
-				function calcularPuntuacionFinal() {
-						document.getElementById('quiz-container').classList.remove('active');
-						document.getElementById('final-score').classList.add('active');
-						const puntuaciones = [];
-						let totalErrores = "";
+	function calcularPuntuacionFinal() {
+		// Elimina la clase 'active' del contenedor del quiz para ocultarlo
+		document.getElementById('quiz-container').classList.remove('active');
+		// Agrega la clase 'active' al contenedor del puntaje final para mostrarlo
+		document.getElementById('final-score').classList.add('active');
 
-						// Evaluar cada pregunta y acumular los detalles
-						evaluarPregunta1();
-						const puntaje1 = obtenerPuntajeDePregunta(1);
-						puntuaciones.push(puntaje1);
-						totalErrores += `<p>Pregunta 1: ${puntaje1} puntos</p>${obtenerErroresDePregunta(1)}`;
+		// Declara un array para almacenar las puntuaciones de cada pregunta
+		const puntuaciones = [];
+		// Declara una variable para acumular los errores en formato HTML
+		let totalErrores = "";
 
-						evaluarPregunta2();
-						const puntaje2 = obtenerPuntajeDePregunta(2);
-						puntuaciones.push(puntaje2);
-						totalErrores += `<p>Pregunta 2: ${puntaje2} puntos</p>${obtenerErroresDePregunta(2)}`;
+		// Evaluar la primera pregunta
+		evaluarPregunta1();
+		// Obtiene el puntaje de la primera pregunta
+		const puntaje1 = obtenerPuntajeDePregunta(1);
+		// Agrega el puntaje de la primera pregunta al array de puntuaciones
+		puntuaciones.push(puntaje1);
+		// Acumula los detalles de la primera pregunta (puntaje y errores)
+		totalErrores += `<p>Pregunta 1: ${puntaje1} puntos</p>${obtenerErroresDePregunta(1)}`;
 
-						evaluarPregunta3();
-						const puntaje3 = obtenerPuntajeDePregunta(3);
-						puntuaciones.push(puntaje3);
-						totalErrores += `<p>Pregunta 3: ${puntaje3} puntos</p>${obtenerErroresDePregunta(3)}`;
+		// Repite el mismo proceso para la segunda pregunta
+		evaluarPregunta2();
+		const puntaje2 = obtenerPuntajeDePregunta(2);
+		puntuaciones.push(puntaje2);
+		totalErrores += `<p>Pregunta 2: ${puntaje2} puntos</p>${obtenerErroresDePregunta(2)}`;
 
-						evaluarPregunta4();
-						const puntaje4 = obtenerPuntajeDePregunta(4);
-						puntuaciones.push(puntaje4);
-						totalErrores += `<p>Pregunta 4: ${puntaje4} puntos</p>${obtenerErroresDePregunta(4)}`;
+		// Repite el mismo proceso para la tercera pregunta
+		evaluarPregunta3();
+		const puntaje3 = obtenerPuntajeDePregunta(3);
+		puntuaciones.push(puntaje3);
+		totalErrores += `<p>Pregunta 3: ${puntaje3} puntos</p>${obtenerErroresDePregunta(3)}`;
 
-						evaluarPregunta5();
-						const puntaje5 = obtenerPuntajeDePregunta(5);
-						puntuaciones.push(puntaje5);
-						totalErrores += `<p>Pregunta 5: ${puntaje5} puntos</p>${obtenerErroresDePregunta(5)}`;
+		// Repite el mismo proceso para la cuarta pregunta
+		evaluarPregunta4();
+		const puntaje4 = obtenerPuntajeDePregunta(4);
+		puntuaciones.push(puntaje4);
+		totalErrores += `<p>Pregunta 4: ${puntaje4} puntos</p>${obtenerErroresDePregunta(4)}`;
 
-						const sumaPuntajes = puntuaciones.reduce((a, b) => a + b, 0);
-						let puntuacionFinal = 2;
+		// Repite el mismo proceso para la quinta pregunta
+		evaluarPregunta5();
+		const puntaje5 = obtenerPuntajeDePregunta(5);
+		puntuaciones.push(puntaje5);
+		totalErrores += `<p>Pregunta 5: ${puntaje5} puntos</p>${obtenerErroresDePregunta(5)}`;
 
-						if (sumaPuntajes >= 23) {
-							puntuacionFinal = 5;
-						} else if (sumaPuntajes >= 18) {
-							puntuacionFinal = 4;
-						} else if (puntuaciones.filter(p => p === 3).length <= 2 && sumaPuntajes >= 14) {
-							puntuacionFinal = 3;
-						}
+		// Calcula la suma total de los puntajes
+		const sumaPuntajes = puntuaciones.reduce((a, b) => a + b, 0);
+		// Define una puntuación inicial (mínima) de 2
+		let puntuacionFinal = 2;
 
-						// Actualizar solo el contenido dinámico sin eliminar el botón
-						const resultadoFinal = document.getElementById("final-score");
-						const dynamicContent = `
-        <p>Puntuación Final: ${puntuacionFinal} puntos</p>
-        <p>Detalles de las preguntas:</p>${totalErrores}
-    `;
-						resultadoFinal.querySelector(".dynamic-content").innerHTML = dynamicContent;
-					}
+		// Determina la puntuación final según las reglas
+		if (puntuaciones.filter(p => p === 2).length > 2) {
+			puntuacionFinal = 2;
+		}//Si hay más de 2 preguntas con 2 tendrá 2 puntos.
+		else if (puntuaciones.filter(p => p === 2).length == 2 && sumaPuntajes < 18) {
+			puntuacionFinal = 2;
+		}//Si hay 2 preguntas con 2 y la suma total es menor que 18 tendrá 2 puntos.
+		else if (puntuaciones.filter(p => p === 2).length == 2) {
+			puntuacionFinal = 3;
+		}//Si hay 2 preguntas con 2 y las condiciones anteriores son falsas tendrá 3 puntos.
 
+		else if (puntuaciones.filter(p => p === 3).length > 2) {
+			puntuacionFinal = 3;
+		}//Si hay más de 2 preguntas con 3 tendrá 3 puntos.
+		else if (puntuaciones.filter(p => p === 3).length == 2 && puntuaciones.filter(p => p === 2).length == 1) {
+			puntuacionFinal = 3;
+		}//Si hay 2 preguntas con 3 y una con 2 tendrá 3 puntos.
 
+		else if (puntuaciones.filter(p => p === 3).length == 2 || puntuaciones.filter(p => p === 2).length == 1) {
+			puntuacionFinal = 4;
+		}//Si hay 2 preguntas con 3 o una con 2 tendrá 4 puntos.
+		else if (puntuaciones.filter(p => p === 4).length >= 2 && sumaPuntajes < 23) {
+			puntuacionFinal = 4;
+		}//Si hay más de 2 preguntas con 4 y la suma total es menor que 23 tendrá 2 puntos.
+		else {
+			puntuacionFinal = 5;
+		}
+		
 
-				function obtenerPuntajeDePregunta(numero) {
-					const resultado = document.getElementById("result");
-					const regex = new RegExp(`Puntaje de la Pregunta ${numero}: (\\d+) puntos`);
-					const match = resultado.innerHTML.match(regex);
-					return match ? parseInt(match[1]) : 0;
-				}
+		// Actualiza el contenido dinámico del elemento de puntaje final sin modificar el botón
+		const resultadoFinal = document.getElementById("final-score");
+		const dynamicContent = `
+    <p>Puntuación Final: ${puntuacionFinal} puntos${puntuaciones}</p>
+    <p>Detalles de las preguntas:</p>${totalErrores}`;
+		resultadoFinal.querySelector(".dynamic-content").innerHTML = dynamicContent;
+		// document.write(`Puntuación Final: ${puntuaciones}`);
+	}
 
-				function obtenerErroresDePregunta(numero) {
-					const resultado = document.getElementById("result");
-					const regex = new RegExp(`Puntaje de la Pregunta ${numero}:(.*?)<p>Errores:</p><ul>(.*?)</ul>`, 's');
-					const match = resultado.innerHTML.match(regex);
-					return match ? `</p><ul>${match[2]}</ul>` : "";
-				}
-			</script>
+	function obtenerPuntajeDePregunta(numero) {
+		// Obtiene el elemento que contiene los resultados
+		const resultado = document.getElementById("result");
+		// Define una expresión regular para buscar el puntaje de una pregunta específica
+		const regex = new RegExp(`Puntaje de la Pregunta ${numero}: (.*?) puntos`);
+		// Busca coincidencias en el contenido del elemento de resultados
+		const match = resultado.innerHTML.match(regex);
+		// Devuelve el puntaje encontrado como número, o 0 si no hay coincidencia
+		return match ? parseInt(match[1]) : 0;
+	}
 
+	function obtenerErroresDePregunta(numero) {
+		// Obtiene el elemento que contiene los resultados
+		const resultado = document.getElementById("result");
+		// Define una expresión regular para capturar los errores de una pregunta específica
+		const regex = new RegExp(`Puntaje de la Pregunta ${numero}:(.*?)<p>Errores:</p><ul>(.*?)</ul>`, 's');
+		// Busca coincidencias en el contenido del elemento de resultados
+		const match = resultado.innerHTML.match(regex);
+		// Devuelve los errores formateados en HTML o una cadena vacía si no hay coincidencias
+		return match ? `</p><ul>${match[2]}</ul>` : "";
+	}
 
 </script>
 
