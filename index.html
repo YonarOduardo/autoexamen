@@ -320,118 +320,120 @@
 		<h1>Dedicado a los estudiantes</h1>
 	</div>
 
-	<script>
-		// Modo claro/oscuro
-		function toggleTheme() {
-			const body = document.body;
-			const themeButton = document.querySelector('.toggle-theme');
-			body.classList.toggle('dark-mode');
-			themeButton.textContent = body.classList.contains('dark-mode') ? '🔆' : '🌙';
+<script>
+	// Modo claro/oscuro
+	function toggleTheme() {
+		const body = document.body;
+		const themeButton = document.querySelector('.toggle-theme');
+		body.classList.toggle('dark-mode');
+		themeButton.textContent = body.classList.contains('dark-mode') ? '🔆' : '🌙';
+	}
+
+	// Mostrar preguntas
+	function showQuiz() {
+		document.querySelector('.presentation').style.display = 'none';
+		document.getElementById('quiz-container').classList.add('active');
+	}
+
+	function nextQuestion(current) {
+		const currentQuestion = document.querySelector(`#question-${current}`);
+		const nextQuestion = document.querySelector(`#question-${current + 1}`);
+
+		if (nextQuestion) {
+			currentQuestion.classList.remove('active');
+			nextQuestion.classList.add('active');
 		}
 
-		// Mostrar preguntas
-		function showQuiz() {
-			document.querySelector('.presentation').style.display = 'none';
-			document.getElementById('quiz-container').classList.add('active');
-		}
+		// Vaciar el elemento de resultados
+		document.getElementById('result').innerHTML = '';
+	}
 
+	// Mostrar créditos
+	function showCredits() {
+		document.getElementById('quiz-container').classList.remove('active');
+		document.getElementById('credits-container').classList.add('active');
+	}
 
-		function nextQuestion(current) {
-			const currentQuestion = document.querySelector(`#question-${current}`);
-			const nextQuestion = document.querySelector(`#question-${current + 1}`);
+	// Manejar respuestas
+	function setAnswer(id, value, event) {
+		event.preventDefault();
 
-			if (nextQuestion) {
-				currentQuestion.classList.remove('active');
-				nextQuestion.classList.add('active');
+		const response = document.getElementById(`response-${id}`);
+		response.textContent = value;
+		response.className = `response ${value === 'V' ? 'true' : 'false'}`;
+		response.style.display = 'inline-flex';
+
+		const buttons = document.querySelectorAll(`#${id} button`);
+		buttons.forEach(button => button.style.display = 'none');
+
+		response.onclick = () => {
+			buttons.forEach(button => button.style.display = 'inline-block');
+			response.textContent = '';
+			response.className = 'response';
+			response.style.display = 'none';
+		};
+	}
+
+	// Evaluar pregunta 1
+	function evaluarPregunta1() {
+		const correctas = {
+			q1a: 'V',
+			q1b: 'V',
+			q1c: 'V',
+			q1d: 'V',
+			q1e: 'V',
+			q1f: 'F',
+			q1g: 'V'
+		};
+		let puntaje = 5;
+		const errores = [];
+
+		for (const [key, valorCorrecto] of Object.entries(correctas)) {
+			const response = document.getElementById(`response-${key}`);
+			if (response.textContent !== valorCorrecto) {
+				puntaje--;
+				errores.push(`${key.toUpperCase()}: La respuesta correcta era ${valorCorrecto}`);
 			}
 		}
 
-
-		// Mostrar créditos
-		function showCredits() {
-			document.getElementById('quiz-container').classList.remove('active');
-			document.getElementById('credits-container').classList.add('active');
+		const resultado = document.getElementById("result");
+		resultado.innerHTML = `<p>Puntaje de la Pregunta 1: ${puntaje} puntos</p>`;
+		if (errores.length > 0) {
+			resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
 		}
+	}
 
-		// Manejar respuestas
-		function setAnswer(id, value, event) {
-			event.preventDefault();
+	// Evaluar pregunta 2
+	function evaluarPregunta2() {
+		const correctas = {
+			q2a: true,
+			q2b: true,
+			q2c: true,
+			q2d: false,  // Este es incorrecto
+			q2e: true,
+			q2f: true,
+			q2g: true
+		};
+		let puntaje = 5;
+		const errores = [];
 
-			const response = document.getElementById(`response-${id}`);
-			response.textContent = value;
-			response.className = `response ${value === 'V' ? 'true' : 'false'}`;
-			response.style.display = 'inline-flex';
-
-			const buttons = document.querySelectorAll(`#${id} button`);
-			buttons.forEach(button => button.style.display = 'none');
-
-			response.onclick = () => {
-				buttons.forEach(button => button.style.display = 'inline-block');
-				response.textContent = '';
-				response.className = 'response';
-				response.style.display = 'none';
-			};
-		}
-
-		// Evaluar pregunta 1
-		function evaluarPregunta1() {
-			const correctas = {
-				q1a: 'V',
-				q1b: 'V',
-				q1c: 'V',
-				q1d: 'V',
-				q1e: 'V',
-				q1f: 'F',
-				q1g: 'V'
-			};
-			let puntaje = 5;
-			const errores = [];
-
-			for (const [key, valorCorrecto] of Object.entries(correctas)) {
-				const response = document.getElementById(`response-${key}`);
-				if (response.textContent !== valorCorrecto) {
-					puntaje--;
-					errores.push(`${key.toUpperCase()}: La respuesta correcta era ${valorCorrecto}`);
-				}
-			}
-
-			const resultado = document.getElementById("result");
-			resultado.innerHTML = `<p>Puntaje de la Pregunta 1: ${puntaje} puntos</p>`;
-			if (errores.length > 0) {
-				resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
-			}
-		}
-		function evaluarPregunta2() {
-			const correctas = {
-				q2a: true,
-				q2b: true,
-				q2c: true,
-				q2d: false,  // Este es incorrecto
-				q2e: true,
-				q2f: true,
-				q2g: true
-			};
-			let puntaje = 5;
-			const errores = [];
-
-			for (const [key, valorCorrecto] of Object.entries(correctas)) {
-				const checkbox = document.querySelector(`input[name="q2"][value="${key}"]`);
-				const isChecked = checkbox.checked;
-				if (isChecked !== valorCorrecto) {
-					puntaje--;
-					errores.push(`${key.toUpperCase()}: La respuesta correcta era ${valorCorrecto ? 'Marcado' : 'No Marcado'}`);
-				}
-			}
-
-			const resultado = document.getElementById("result");
-			resultado.innerHTML = `<p>Puntaje de la Pregunta 2: ${puntaje} puntos</p>`;
-			if (errores.length > 0) {
-				resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
+		for (const [key, valorCorrecto] of Object.entries(correctas)) {
+			const checkbox = document.querySelector(`input[name="q2"][value="${key}"]`);
+			const isChecked = checkbox.checked;
+			if (isChecked !== valorCorrecto) {
+				puntaje--;
+				errores.push(`${key.toUpperCase()}: La respuesta correcta era ${valorCorrecto ? 'Marcado' : 'No Marcado'}`);
 			}
 		}
 
+		const resultado = document.getElementById("result");
+		resultado.innerHTML = `<p>Puntaje de la Pregunta 2: ${puntaje} puntos</p>`;
+		if (errores.length > 0) {
+			resultado.innerHTML += `<p>Errores:</p><ul>${errores.map(e => `<li>${e}</li>`).join('')}</ul>`;
+		}
+	}
+</script>
 
-	</script>
 </body>
 
 </html>
